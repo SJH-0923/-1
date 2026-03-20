@@ -1,0 +1,24 @@
+ls : 리스트 보여줌
+cd : change direction 경로 설정
+cd.. : 설정한 경로 나가기
+pwd : Print Working Directory 작업하고 있는 폴더의 경로를 출력
+mkdir : makd directory 디렉토리를 만듦
+rmdir : remove directory 디렉토리 지움
+echo : 문자열이나 객체를 화면에 출력해줌
+ls -al : 숨겨진 파일까지 다 보여줌
+rm : 파일 싹 다 삭제
+
+깃허브에 올리는 과정
+git init
+echo "# 2026_AI_Program" >> README.md
+git add README.md
+git commit -m "2026.03.18 coding"
+git branch -M main
+git remote add origin https://github.com/SJH-0923/2026_AI_Program.git
+git push -u origin main
+
+
+git pull origin main : 깃허브에 올리기
+git push origin main : 깃허브에서 불러오기
+
+제어문
