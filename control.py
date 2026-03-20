@@ -7,12 +7,11 @@ num = 300
 print("num =", num)
 '''
 
-'''
+
 num = 0
 for i in range(1000):
     num +=100
-    print("ith num =", i, num)
-'''
+print("ith num =", i, num)
 
 
 age = int(input("나이를 입력하세요."))
