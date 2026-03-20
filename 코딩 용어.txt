@@ -17,8 +17,20 @@ git branch -M main
 git remote add origin https://github.com/SJH-0923/2026_AI_Program.git
 git push -u origin main
 
+git add . : 폴더 안에 있는 모든 파일들을 담는다.
+git add 파일명: 파일 하나만 담는다.
+git commit -m "메시지" : 
 
-git pull origin main : 깃허브에 올리기
-git push origin main : 깃허브에서 불러오기
 
-제어문
+
+git push origin main : 깃허브에 올리기
+git pull origin main : 깃허브에서 불러오기
+
+<제어문>
+조건문 : if 문, if - else 문
+반복문 : for 문, while 문
+반복문 흐름 변경 : break 문, continue
+
+if : 조건 적용
+else if (elif) : else 중에서 추가적인 조건 적용
+else : if, elif 말고 다
