@@ -8,7 +8,7 @@ echo : 문자열이나 객체를 화면에 출력해줌
 ls -al : 숨겨진 파일까지 다 보여줌
 rm : 파일 싹 다 삭제
 
-깃허브에 올리는 과정
+깃허브에 처음 올리는 과정
 git init
 echo "# 2026_AI_Program" >> README.md
 git add README.md
@@ -18,10 +18,10 @@ git remote add origin https://github.com/SJH-0923/2026_AI_Program.git
 git push -u origin main
 
 
-순서
+깃허브에 올리는 순서
 git add . : 폴더 안에 있는 모든 파일들을 담는다.
 git add . 파일명: 파일 하나만 담는다.
-git commit -m "메시지" : commit을 해야 포장이 된 거임
+git commit -m "메시지" : commit을 해야 포장이 된 거임. 따옴표 안에 글이 무조건 있어야 함.
 git push origin main
 
 git push origin main : 깃허브에 올리기
