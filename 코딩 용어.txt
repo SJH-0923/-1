@@ -32,6 +32,17 @@ git pull origin main : 깃허브에서 불러오기
 반복문 : for 문, while 문
 반복문 흐름 변경 : break 문, continue
 
+-조건문
 if : 조건 적용
 else if (elif) : else 중에서 추가적인 조건 적용
 else : if, elif 말고 다
+
+-반복문
+for i in range() : range 안에서 i를 받아와라.
+range()에서 괄호 안의 순서 (start, stop, step) 시작, 멈춤, 간격
+※ i는 단순 매개변수라서 다른 기호를 사용해도 상관 없다.
+
+-리스트 변수
+score = [87,84, 95, 67]
+for i in score(리스트 변수)를 넣으면 리스트를 프린트 해준다. 숫자 및 문자로도 받을 수 있다.
+list(range(5)) : range(5)를 list로 바꾼다.
