@@ -27,6 +27,11 @@ git push origin main
 git push origin main : 깃허브에 올리기
 git pull origin main : 깃허브에서 불러오기
 
+결과가 없는 함수 : print
+결과가 있는 함수 : input
+
+
+
 <제어문>
 조건문 : if 문, if - else 문
 반복문 : for 문, while 문
@@ -46,3 +51,25 @@ range()에서 괄호 안의 순서 (start, stop, step) 시작, 멈춤, 간격
 score = [87,84, 95, 67]
 for i in score(리스트 변수)를 넣으면 리스트를 프린트 해준다. 숫자 및 문자로도 받을 수 있다.
 list(range(5)) : range(5)를 list로 바꾼다.
+
+myString = "apple"
+for ch in myString :
+    print(ch) ---> 이렇게 입력하면 문자 스펠링 하나하나가 따로따로 찍힌다.
+
+리스트가 -1이면 리스트의 제일 마지막 요소를 프린트 함. (한 바퀴만 돌 수 있다.)
+
+list.append('') : list라는 리스트 안에 새로운 요소를 추가한다.
+
+메소드 : 객체가 가지고 있는 명령어
+list.메소드 : 리스트는 정보도 담고 있지만 행동(추가, 삭제 등)이 가능 ex) .append() 메소드 등
+.append() : 요소 추가
+.pop() : 요소 삭제 (괄호 안에 숫자 있으면 순서, 없으면 맨 마지막 요소 삭제)
+.remove : 요소 삭제(괄호 안에 요소를 넣어서 삭제)
+
+
+min() : 
+max() : 
+sum() : 
+reverse() : sort reverse = True 랑 똑같음
+
+list[1:5] : 1요소부터 5요소까지 슬라이싱. (앞에서부터 start, stop, step 순으로 똑같다.)
