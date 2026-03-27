@@ -73,3 +73,7 @@ sum() :
 reverse() : sort reverse = True 랑 똑같음
 
 list[1:5] : 1요소부터 5요소까지 슬라이싱. (앞에서부터 start, stop, step 순으로 똑같다.)
+
+줄바꿈 기호 \n
+기본적으로 print()는 print( , end = '\n')가 있는데 end = '\n'는 생략이 되어 있다.
+그래서 가로로 배열하고자 할 때는 end = ' '로 \n을 지워주면 됨
