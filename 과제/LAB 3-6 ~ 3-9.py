@@ -40,6 +40,7 @@ a = 0
 for i in range(1,101,2) :
     a = a+i
 print('1에서 100까지 홀수의 합 :', a)
+print('\n')
 
 #LAB 3-9
 n = 7

@@ -1,3 +1,18 @@
+unix
+
+쉘의 차이
+
+python
+
+Ubuntu 깔아라
+
+C:\Users\me>c:
+C:\Users\me>cd\
+C:\mkdir workspace
+C:\>cd workspace
+C:\workspace>
+
+
 ls : 리스트 보여줌
 cd : change direction 경로 설정
 cd.. : 설정한 경로 나가기
@@ -77,3 +92,29 @@ list[1:5] : 1요소부터 5요소까지 슬라이싱. (앞에서부터 start, st
 줄바꿈 기호 \n
 기본적으로 print()는 print( , end = '\n')가 있는데 end = '\n'는 생략이 되어 있다.
 그래서 가로로 배열하고자 할 때는 end = ' '로 \n을 지워주면 됨
+
+dictionary
+key와 value가 존재
+형태 : 딕셔너리 이름 = {key : value, ...}
+person = {'이름' : '홍길동', '나이' : 26, '몸무게' : 82 }
+위와 같이 했을 때, 이름(key)과 홍길동(value)가 있다
+print(person[key값])을 하면 해당 value를 준다
+
+dictionary에 요소 추가 방법
+형태 : 딕셔너리 이름[key] = value
+person['국적'] = '대한민국'
+
+dictionary에 요소 삭제 방법
+형태 : del 딕셔너리 이름['key']
+del person['국적']
+
+딕셔너리 부등호 지원 안 함.
+
+딕셔너리 메서드
+
+(파이썬 모든 변수는 객체변수)
+
+튜플
+튜플과 리스트의 차이 : 튜플은 정의하면 추가 및 삭제가 안 된다.
+함수의 아웃풋은 튜플
+output_list = list(output) 아웃풋 값을 리스트로 바꾸는 방법
