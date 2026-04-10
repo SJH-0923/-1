@@ -15,7 +15,7 @@ C:\workspace>
 
 ls : 리스트 보여줌
 cd : change direction 경로 설정
-cd.. : 설정한 경로 나가기
+cd .. : 설정한 경로 나가기
 pwd : Print Working Directory 작업하고 있는 폴더의 경로를 출력
 mkdir : makd directory 디렉토리를 만듦
 rmdir : remove directory 디렉토리 지움

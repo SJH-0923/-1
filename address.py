@@ -17,3 +17,5 @@ with open("addressbook.json", "r", encoding = "utf-8")as f :
 
 print("불러온 주소록 :", addressbook)
 print("서재현 번호 :", addressbook["서재현"])
+
+print("git bash test")
