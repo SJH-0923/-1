@@ -8,6 +8,11 @@ while True :
     print()
     print("[추가 / 조회 / 검색 / 삭제 / 종료]")
     a = input("작업을 선택하세요 :")
+    
+    #다른 입력 감지
+    if a != "추가" and  a != "조회" and  a != "검색" and a != "삭제" and a != "종료" :
+        print("\n잘못된 입력입니다. 다시 입력해주세요.")
+        continue
 
     #추가
     if a == "추가" :
@@ -15,6 +20,10 @@ while True :
         #주소록 추가
         while True :
             name = input("이름 (작업을  종료하려면  '이전'):")
+            if name == "" :
+                print("잘못된 입력입니다. 다시 입력해 주세요.")
+                continue
+
             if name == "이전" :
                 break
                 
@@ -22,23 +31,41 @@ while True :
                 print("이미 저장된 이름입니다. 새로 저장하시겠습니까? (y/n)")
                 e = input("")
                 if e == "y" :
-                    addressbook[name] = number
+                    pass
 
                 if e == "n" :
+                    print("기존 주소록에 덮어씌우시겠습니까? (y/n)")
+                    g = input("")
+                    if g == "y" :
+                        pass
+                    
+                    if g == "n" :
+                        continue
+                    
+                if e == "" :
+                    print("잘못된 입력입니다. 다시 입력해 주세요..")
                     continue
 
             number = input("전화번호 (작업을 종료하려면 '이전') :")
             if(number == "이전") :
                 break
 
+            if number == "" :
+                print("잘못된 입력입니다. 다시 입력해 주세요.")
+                continue
+
+            if len(number) != 11 :
+                print("잘못된 입력입니다. 다시 입력해 주세요.")
+                continue
+
             addressbook[name] = number
 
 
-        #파일 저장하기
-        with open("addressbook.json", "w", encoding = "utf-8")as f :
-            json.dump(addressbook, f, ensure_ascii = False, indent = 4)
-        print()
-        print("주소록이 저장되었습니다.")
+            #파일 저장하기
+            with open("addressbook.json", "w", encoding = "utf-8")as f :
+                json.dump(addressbook, f, ensure_ascii = False, indent = 4)
+            print()
+            print("주소록이 저장되었습니다.")
 
     #조회
     if a == "조회" :
@@ -101,3 +128,9 @@ while True :
     if a == "종료" :
         print("종료합니다.")
         break
+
+
+
+ # !!! 동명이인일 경우 어떻게 해야 하는지 아직 난제임
+ # !!! 그냥 엔터를 쳤을 때 잘못된 입력입니다. 하고 리턴할 수 있게 다시 만들기
+ # !!! 추가 파트만 조금 더 세분화 하면 될 듯 ! 나머지는 괜찮다.
