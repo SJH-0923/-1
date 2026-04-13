@@ -3,12 +3,13 @@ import json #모듈 부르기
 #파일 불러오기
 with open("addressbook.json", "r", encoding = "utf-8")as f :
         addressbook = json.load(f) #파일 읽기
-        content = f.read()
 
-if content == "" :
+if not addressbook :
     addressbook = {}
+
 else :
-    addressbook = json.loads(contents)
+    with open("addressbook.json", "r", encoding = "utf-8")as f :
+        addressbook = json.load(f)
 
 while True :
     print("[추가 / 조회 / 검색 / 삭제 / 종료]")
@@ -98,7 +99,7 @@ while True :
             print()
 
         else :
-            print("저장된  주소록\n")
+            print("저장된 주소록\n")
             for key in sorted_addressbook :
                 print('{} : {}'.format(key, sorted_addressbook[key]))#모든 사람의 주소록
             print()
@@ -145,6 +146,7 @@ while True :
                 print()
                 if d == "" :
                     print("잘못된 입력입니다. 다시 입력해 주세요.")
+                    print()
                     continue
 
                 if d == "이전" :
