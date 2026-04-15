@@ -148,3 +148,8 @@ import ~ as 별칭
 
 dir 함수 : 모듈이 가진 클래스의 목록을 출력
 replace() 메소드 : datetime에서 날짜나 시간 값을 변경하고 싶을 때 사용
+
+print의 아웃풋 = str(문자열)
+
+class변수의 특징
+메서드(함수) 가능
