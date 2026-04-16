@@ -195,6 +195,19 @@ print()
 
 #LAB 6-11
 print("LAB 6-11")
+
+#1
+print("#1")
+def product_set(set1, set2) :
+    res = set()
+    for i in set1 :
+        for j in set2 :
+            res = res | {(i, j)}
+    return res
 A = {1, 2}
 B = {"A", "B", "C"}
-print("1) A X B =", )
+print("1) A X B =", product_set(A, B))
+print("2) B x A =", product_set(B, A))
+print("3) A x A =", product_set(A, A))
+print("4) B x B =", product_set(B, B))
+

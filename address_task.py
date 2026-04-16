@@ -12,11 +12,11 @@ else :
         addressbook = json.load(f)
 
 while True :
-    print("[추가 / 조회 / 검색 / 삭제 / 종료]")
+    print("[추가 / 수정 / 조회 / 검색 / 삭제 / 종료]")
     a = input("작업을 선택하세요 :")
     
     #다른 입력 감지
-    if a != "추가" and  a != "조회" and  a != "검색" and a != "삭제" and a != "종료" :
+    if a != "추가" and  a != "조회" and  a != "검색" and a != "삭제" and a != "종료" and a != "수정" :
         print("\n잘못된 입력입니다. 다시 입력해주세요.")
         print()
         continue
@@ -34,6 +34,10 @@ while True :
 
             if name == "이전" :
                 break
+            
+            name = f"{name}1"
+            final_name = name
+            is_cancel = False
 
             #새로 저장하면 리스트를 이용해서 새로운 저장. dic은 key값이 하나만 됨.    
             if name in addressbook :
@@ -43,7 +47,10 @@ while True :
                     continue
 
                 if b == "y" :
-                    pass
+                    count = 2
+                    while f"{name}{count}" in addressbook :
+                        count += 1
+                    final_name = f"{name}{count}"
 
                 if b == "n" :
                     e = input("기존 주소록에 덮어씌우시겠습니까? (y/n)")
@@ -52,37 +59,111 @@ while True :
                         continue
 
                     if e == "y" :
-                        pass
+                        final_name = name
                     
                     if e == "n" :
-                        break
+                        is_cancel = True
+
+                if is_cancel :
+                    continue
                     
                 if b == "" :
                     print("잘못된 입력입니다. 다시 입력해 주세요..")
                     continue
 
-            number = input("전화번호 (작업을 종료하려면 '이전') :")
-            print()
-            if(number == "이전") :
+            while True :
+                number = input("전화번호 (-)제외 (작업을 종료하려면 '이전') :")
+                print()
+                
+                if(number == "이전") :
+                    break
+
+                if number == "" :
+                    print("잘못된 번호입니다. 다시 입력해 주세요.\n")
+                    continue
+
+                if len(number) != 11 :
+                    print("잘못된 번호입니다. 11자리 숫자를 입력해 주세요.\n")
+                    continue
+
+                if not number.isdigit() :
+                    print("숫자만 입력 가능합니다. 다시 입력해 주세요.\n")
+                    continue
+
+                #파일 저장하기
+                addressbook[final_name] = number
+
+                with open("addressbook.json", "w", encoding = "utf-8")as f :
+                    json.dump(addressbook, f, ensure_ascii = False, indent = 4)
+                
                 break
-
-            if number == "" :
-                print("잘못된 번호입니다. 다시 입력해 주세요.\n")
-                continue
-
-            if len(number) != 11 :
-                print("잘못된 번호입니다. 다시 입력해 주세요.")
-                continue
-
-            addressbook[name] = number
-
-
-            #파일 저장하기
-            with open("addressbook.json", "w", encoding = "utf-8")as f :
-                json.dump(addressbook, f, ensure_ascii = False, indent = 4)
             print()
             print("주소록이 저장되었습니다.")
             print()
+    #수정
+    if a == "수정" :
+
+        if not addressbook :
+            print("\n수정할 주소록이 없습니다.\n")
+
+        else :
+            while True :
+                keys = sorted(addressbook.keys())
+                for i, key in enumerate(keys, start = 1) :
+                    display_name = key.rstrip("0123456789")
+                    print(f"{i}번. {display_name} : {addressbook[key]}")
+
+                choice = input("수정할 주소록  번호를 선택하세요. (작업을  종료하려면 '이전') :")
+
+                if choice == "이전" :
+                    break
+
+                if not choice.isdigit() :
+                    print("숫자만 입력해 주세요.\n")
+                    continue
+
+                idx = int(choice) - 1
+
+                if idx < 0 or idx >= len(keys) :
+                    print("목록에 있는 번호를 입력하세요.\n")
+                    continue
+
+                target = keys[idx]
+                modify = input("수정할 항목을 입력하세요 (이름, 전화번호) :")
+
+                if modify == "이름" :
+                    new_name = input("이름을 입력하세요 :")
+                    if new_name == "" :
+                        print("잘못된 입력입니다.\n")
+                        continue
+
+                    count = 1
+                    new_key = f"{new_name}{count}"
+                    while new_key in addressbook :
+                        count += 1
+                        new_key = f"{new_name}{count}"
+
+                    current_number = addressbook[target]
+                    del addressbook[target]
+                    addressbook[new_key] = current_number
+                    print("이름이 수정되었습니다.")
+
+                if modify == "전화번호" :
+                    new_number = input("새로운 전화번호를 입력하세요. (- 제외 11자리) :")
+                
+                    if len(new_number) == 11 and new_number.isdigit() :
+                        addressbook[target] = new_number
+                        print("전화번호가 수정되었습니다.")
+                
+                    else :
+                        print("잘못된 번호 형식입니다.\n")
+                        continue
+
+                with open("addressbook.json", "w", encoding = "utf-8")as f :
+                    json.dump(addressbook, f, ensure_ascii = False, indent = 4)
+
+                break
+
 
     #조회
     if a == "조회" :
@@ -101,7 +182,8 @@ while True :
         else :
             print("저장된 주소록\n")
             for key in sorted_addressbook :
-                print('{} : {}'.format(key, sorted_addressbook[key]))#모든 사람의 주소록
+                display_name = key.rstrip("0123456789")
+                print('{} : {}'.format(display_name, sorted_addressbook[key]))#모든 사람의 주소록
             print()
 
     #검색
@@ -115,54 +197,80 @@ while True :
                 print()
                 c = input("찾는 사람의 이름 (작업을 종료하려면 '이전') :")
                 print()
-                if c == "" :
-                    print("잘못된 입력입니다. 다시 입력해 주세요.")
-                    continue
-
-                if c in addressbook :
-                    print(c, "님의  번호 :", addressbook[c]) #특정 사람의 주소록
-
+                
                 if c == "이전" :
                     break
 
-                if c not in addressbook :
-                    print(c + "님은 등록되어 있지 않습니다.")
+                if c == "" :
+                    print("잘못된 입력입니다. 다시 입력해 주세요.")
+                    continue
+                
+                found = False
+                for key in addressbook :
+                    if c in key :
+                        display_name = key.rstrip("0123456789")
+                        print(f"{display_name} : {addressbook[key]}")
+                        found = True
+
+                if not found :
+                    print(f"{c}님은 등록되어 있지 않습니다.")
+                
+                print()
 
     #삭제
     if a == "삭제" :
         if not addressbook :
-            print()
-            print("저장된 주소록이 없습니다.")
-            print()
+            print("\n저장된 주소록이 없습니다.\n")
 
         else :
             while True :
                 print("저장된  주소록\n")
                 sorted_addressbook = dict(sorted(addressbook.items()))
                 for key in sorted_addressbook :
-                    print('{} : {}'.format(key, sorted_addressbook[key]))
+                    display_name = key.rstrip("0123456789")
+                    print(f'{display_name} : {sorted_addressbook[key]}')
                 print()
                 d = input("삭제할 사람의 이름 (작업을 종료하려면 '이전') :")
                 print()
+
+                if d == "이전" :
+                    break
+                
                 if d == "" :
                     print("잘못된 입력입니다. 다시 입력해 주세요.")
                     print()
                     continue
 
-                if d == "이전" :
-                    break
+                found_keys = []
+                found = False
 
-                if d not in addressbook :
-                    print(d, "님은 등록되어 있지 않습니다.")
-                    print()
+                for key in addressbook :
+                    if d in key :
+                        found_keys.append(key)
+                        display_name = key.rstrip("0123456789")
+                        print(f"{len(found_keys)}번. {display_name} : {addressbook[key]}")
+                        found = True
+                if not found :
+                    print(f"{d}님을 찾을 수 없습니다.")
+                    continue
 
-                if d in addressbook :
-                    del addressbook[d]
-                    print("삭제되었습니다.")
-                    print()
+                choice = input("삭제할 주소록  번호를 선택하세요. (작업을  종료하려면 '이전') :")
 
-                with open("addressbook.json", "w", encoding = "utf-8")as f :
-                    json.dump(addressbook, f, ensure_ascii = False, indent = 4)
+                if choice == "이전" :
+                    continue
+                
+                if choice.isdigit() :
+                    idx = int(choice) - 1
+                    if 0 <= idx < len(found_keys) :
+                        target = found_keys[idx]
+                        del addressbook[target]
+                    
+                        with open("addressbook.json", "w", encoding = "utf-8")as f :
+                            json.dump(addressbook, f, ensure_ascii = False, indent = 4)
+
+                        print("삭제되었습니다.")
+                        print()
+                        break
 
     #종료
     if a == "종료" :
