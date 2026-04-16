@@ -4,7 +4,7 @@ import json
 try:
     with open("addressbook.json", "r", encoding="utf-8") as f:
         addressbook = json.load(f)
-except FileNotFoundError:
+except (FileNotFoundError, json.JSONDecodeError):
     addressbook = {}
 
 while True:
